@@ -17,4 +17,4 @@
    Note: Whenever we change in `api/v1alpha1 (types)` then run `kubectl delete -f config/crd/bases` and `kubectl create -f config/crd/bases`.
  - Apply crd : `kubectl apply -f config/crd/bases`
  - Run Operator : `make run`
-   Test things are working fine
+ - `kubectl apply -f config/manifests/podtatohead.yaml -n oumk`
