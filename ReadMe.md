@@ -3,13 +3,13 @@
 ## Steps to Install
  - Enter into root directory
 ### Install CRD
- - `kubectl apply -f config/crd`
+ - `kubectl apply -f https://raw.githubusercontent.com/oumkale/k8sOperator/main/config/crd/bases/crd.demo.com_podtatoheads.yaml`
 ### Install rbac
- - `kubectl apply -f config/rbac-manifest -n oumk` (`oumk` namespace hard coded in rbac manifests please update if you using own namespace)
- ### For Operator deployment
- - `kubectl apply -f config/operator/deployment.yaml -n oumk`
+ - `kubectl apply -f https://raw.githubusercontent.com/oumkale/k8sOperator/main/config/operator/deployment.yaml`
 ### PodTatoHead CR
- - `kubectl apply -f config/manifests/podtatohead.yaml -n oumk`
+ - `kubectl apply -f https://raw.githubusercontent.com/oumkale/k8sOperator/main/config/CRmanifests/podtatohead.yaml`
+### Check Resources in `operator` namespace
+ - `kubectl get po -n operator`
 
 ## To test locally
  - Run Operator locally :
