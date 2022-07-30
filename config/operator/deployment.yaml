@@ -64,19 +64,6 @@ spec:
       serviceAccountName: operator
       terminationGracePeriodSeconds: 10
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: operator
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: operator
-subjects:
-- kind: ServiceAccount
-  name: operator
-  namespace: operator
----
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -126,6 +113,19 @@ rules:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  name: operator
+  namespace: operator
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: operator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: operator
+subjects:
+- kind: ServiceAccount
   name: operator
   namespace: operator
 ---
