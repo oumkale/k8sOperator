@@ -279,7 +279,7 @@ spec:
         - ./operator
         args:
         - --leader-elect
-        image: kaleoum/podtato-demo-ope:demo
+        image: kaleoum/operator:gitops
         name: manager
         env:
         - name: "URL"
@@ -387,7 +387,6 @@ spec:
     - name: PORT
       value: "9000"
   main:
-    image: kaleoum/podtato-main:v0.1.1
     name: main
     port: 9000
 

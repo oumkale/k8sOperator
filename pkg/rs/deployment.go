@@ -12,6 +12,10 @@ import (
 //Deployment returns the Deployment object for the PodTatoHead
 func Deployment(podtatohead *v1alpha1.PodTatoHead, name, image, namespace string, env []corev1.EnvVar, scheme *runtime.Scheme) *appsv1.Deployment {
 
+	if image == "" {
+		image = "kaleoum/podtato-main:v0.1.1"
+	}
+
 	dep := &appsv1.Deployment{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      "podtato-" + name,
