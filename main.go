@@ -26,7 +26,6 @@ import (
 	crdv1alpha1 "git.com.info/users/oumk/repos/podtatohead/api/v1alpha1"
 	"git.com.info/users/oumk/repos/podtatohead/controllers/podtatohead"
 
-	_ "git.com.info/users/oumk/repos/podtatohead/pkg/client"
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
 	clientgoscheme "k8s.io/client-go/kubernetes/scheme"
