@@ -21,7 +21,7 @@ type PodTatoHeadSpec struct {
 	Port         int             `json:"port,omitempty"`
 }
 
-// MainInfo defines the observed state of CopySystemYaml
+// MainInfo defines the observed state of Main
 type MainInfo struct {
 	Image       string `json:"image,omitempty"`
 	Name        string `json:"name,omitempty"`
@@ -29,7 +29,7 @@ type MainInfo struct {
 	ServiceType string `json:"serviceType,omitempty"`
 }
 
-// LeftLegInfo defines the observed state of WaitForDb
+// LeftLegInfo defines the observed state of LeftLeg
 type LeftLegInfo struct {
 	Image       string `json:"image,omitempty"`
 	Name        string `json:"name,omitempty"`
@@ -37,7 +37,7 @@ type LeftLegInfo struct {
 	ServiceType string `json:"serviceType,omitempty"`
 }
 
-// HatsInfo defines the observed state of WaitForDb
+// HatsInfo defines the observed state of Hats
 type HatsInfo struct {
 	Image       string `json:"image,omitempty"`
 	Name        string `json:"name,omitempty"`
@@ -45,7 +45,7 @@ type HatsInfo struct {
 	ServiceType string `json:"serviceType,omitempty"`
 }
 
-// LeftArmInfo defines the observed state of WaitForDb
+// LeftArmInfo defines the observed state of LeftArm
 type LeftArmInfo struct {
 	Image       string `json:"image,omitempty"`
 	Name        string `json:"name,omitempty"`
@@ -53,7 +53,7 @@ type LeftArmInfo struct {
 	ServiceType string `json:"serviceType,omitempty"`
 }
 
-// RightLegInfo defines the observed state of Marshaller
+// RightLegInfo defines the observed state of RightLeg
 type RightLegInfo struct {
 	Image       string `json:"image,omitempty"`
 	Name        string `json:"name,omitempty"`
@@ -61,6 +61,7 @@ type RightLegInfo struct {
 	ServiceType string `json:"serviceType,omitempty"`
 }
 
+// RightArmInfo defines the observed state of RightArm
 type RightArmInfo struct {
 	Image       string `json:"image,omitempty"`
 	Name        string `json:"name,omitempty"`
