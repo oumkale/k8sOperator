@@ -8,9 +8,6 @@ spec:
   name: pod-tato-head
   namespace: operator
   version: v0.1.1
-  env:
-    - name: PORT
-      value: "9000"
   main:
     image: kaleoum/podtato-main:v0.1.1
     name: main
@@ -20,7 +17,6 @@ spec:
     image: kaleoum/podtato-hats:v0.1.1
     name: hats
     port: 9001
-    env:
 
   leftLeg:
     image: kaleoum/podtato-left-leg:v0.1.1
