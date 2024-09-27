@@ -1,0 +1,131 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: operator
+  labels:
+    control-plane: operator
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: operator
+  namespace: operator
+  labels:
+    control-plane: operator
+spec:
+  selector:
+    matchLabels:
+      control-plane: operator
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/default-container: manager
+      labels:
+        control-plane: operator
+    spec:
+      securityContext:
+        runAsNonRoot: false
+
+      containers:
+      - command:
+        - ./operator
+        args:
+        - --leader-elect
+        image: kaleoum/podtato-demo-ope:demo
+        name: manager
+        env:
+        - name: "URL"
+          value: "http://demo-app.operator:9090/version"
+        securityContext:
+          allowPrivilegeEscalation: false
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8081
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8081
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        # TODO(user): Configure the resources accordingly based on the project requirements.
+        # More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+        resources:
+          limits:
+            cpu: 500m
+            memory: 128Mi
+          requests:
+            cpu: 10m
+            memory: 64Mi
+      serviceAccountName: operator
+      terminationGracePeriodSeconds: 10
+---
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: operator
+rules:
+- apiGroups:
+  - crd.demo.com
+  resources:
+  - podtatoheads
+  - podtatoheads/finalizers
+  - podtatoheads/status
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+
+- apiGroups:
+  - crd.demo.com
+  resources:
+  - leases
+  verbs:
+  - get
+  - patch
+  - update
+  - list
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - get
+  - patch
+  - update
+  - create
+  - delete
+- apiGroups: ["", "apps"]
+  resources: ["statefulsets", "events", "serviceaccounts", "deployments", "configmaps", "services", "secrets", "persistentvolumeclaims", "pods", "pods/log"]
+  verbs: ["get", "watch", "list", "create", "delete", "update"]
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: operator
+  namespace: operator
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: operator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: operator
+subjects:
+- kind: ServiceAccount
+  name: operator
+  namespace: operator
+---
