@@ -1,10 +1,4 @@
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: operator
-  labels:
-    control-plane: operator
+
 ---
 apiVersion: apps/v1
 kind: Deployment
